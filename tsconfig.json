@@ -1,0 +1,17 @@
+{
+  "compilerOptions": {
+    "lib": ["es5", "es6", "dom"],
+    "allowJs": true,
+    "outDir": "./web/js/",
+    "sourceMap": true,
+    "noImplicitAny": true,
+    "module": "commonjs",
+    "esModuleInterop": true,
+    "target": "es6",
+    "moduleResolution": "node",
+    "jsx": "react"
+  },
+  "include": [
+    "./src/hello-triangle/**/*",
+  ]
+}

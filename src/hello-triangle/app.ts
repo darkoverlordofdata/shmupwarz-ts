@@ -1,4 +1,6 @@
 export { }
+import { vertexShaderSource, fragmentShaderSource } from './shader_source'
+import { Shader } from "../common/shader"
 
 // This code is a javascript translation of code originally written by Joey de Vries under the CC BY-NC 4.0 licence. 
 // For more information please visit https://learnopengl.com/About
@@ -6,29 +8,15 @@ export { }
 // settings
 const sizeFloat = 4;
 
-const vertexShaderSource = `#version 300 es 
-precision mediump float;
-layout (location = 0) in vec3 aPos;
-    void main()
-    {
-       gl_Position = vec4(aPos.x, aPos.y, aPos.z, 1.0);
-    }`;
-
-const fragmentShaderSource = `#version 300 es 
-precision mediump float;
-out vec4 FragColor;
-void main()
-{
-    FragColor = vec4(1.0f, 0.5f, 0.2f, 1.0f);
-}`
-
 // global variables
 let canvas: HTMLCanvasElement;
 let gl: WebGL2RenderingContext;
 let VAO: WebGLVertexArrayObject;
 let shaderProgram: WebGLProgram;
+let shader: Shader;
 
-let main = function () {
+// let main = function () {
+function main() {
     // canvas creation and initializing OpenGL context
     canvas = document.createElement('canvas');
     canvas.width = window.innerWidth;
@@ -40,43 +28,7 @@ let main = function () {
     }
     window.onresize = () => { framebufferSizeCallback(window.innerWidth, window.innerHeight) }
 
-    // build and compile our shader program
-    // ------------------------------------
-    // vertex shader
-    let vertexShader = gl.createShader(gl.VERTEX_SHADER);
-    gl.shaderSource(vertexShader, vertexShaderSource);
-    gl.compileShader(vertexShader);
-    // check for shader compile errors
-    let success;
-
-    success = gl.getShaderParameter(vertexShader, gl.COMPILE_STATUS);
-    if (!success) {
-        //gl.getShaderInfoLog(vertexShader, 512, NULL, infoLog);
-        console.log("ERROR::SHADER::VERTEX::COMPILATION_FAILED " + gl.getShaderInfoLog(vertexShader)); return;
-    }
-    // fragment shader
-    let fragmentShader = gl.createShader(gl.FRAGMENT_SHADER);
-    gl.shaderSource(fragmentShader, fragmentShaderSource);
-    gl.compileShader(fragmentShader);
-    // check for shader compile errors
-    success = gl.getShaderParameter(fragmentShader, gl.COMPILE_STATUS);
-    if (!success) {
-        //gl.getShaderInfoLog(fragmentShader, 512, NULL, infoLog);
-        console.log("ERROR::SHADER::FRAGMENT::COMPILATION_FAILED " + gl.getShaderInfoLog(fragmentShader)); return;
-    }
-    // link shaders
-    shaderProgram = gl.createProgram();
-    gl.attachShader(shaderProgram, vertexShader);
-    gl.attachShader(shaderProgram, fragmentShader);
-    gl.linkProgram(shaderProgram);
-    // check for linking errors
-    success = gl.getProgramParameter(shaderProgram, gl.LINK_STATUS);
-    if (!success) {
-        //gl.getProgramInfoLog(shaderProgram, 512, NULL, infoLog);
-        console.log("ERROR::SHADER::PROGRAM::LINKING_FAILED" + gl.getProgramInfoLog(shaderProgram)); return;
-    }
-    gl.deleteShader(vertexShader);
-    gl.deleteShader(fragmentShader);
+    shader = new Shader(gl, vertexShaderSource, fragmentShaderSource)
 
     // set up vertex data (and buffer(s)) and configure vertex attributes
     // ------------------------------------------------------------------
@@ -106,10 +58,12 @@ let main = function () {
     gl.bindVertexArray(null);
 
     requestAnimationFrame(render);
-}();
+}//();
 
-// uncomment this call to draw in wireframe polygons.
-//gl.polygonMode(gl.FRONT_AND_BACK, gl.LINE);
+window.onload = () => {
+    console.log("window loaded")
+    main()
+}
 
 // render loop
 // -----------
@@ -124,25 +78,11 @@ function render() {
     gl.clear(gl.COLOR_BUFFER_BIT);
 
     // draw our first triangle
-    gl.useProgram(shaderProgram);
+    shader.use(gl)
     gl.bindVertexArray(VAO); // seeing as we only have a single VAO there's no need to bind it every time, but we'll do so to keep things a bit more organized
     gl.drawArrays(gl.TRIANGLES, 0, 3);
-    // gl.indVertexArray(0); // no need to unbind it every time 
-
-    // if wanted...
-    //requestAnimationFrame(render);
 
 }
-
-// // optional: de-allocate all resources once they've outlived their purpose:
-// // ------------------------------------------------------------------------
-// gl.deleteVertexArray(VAO);
-// gl.deleteBuffer(VBO);
-
-// // glfw: terminate, clearing all previously allocated GLFW resources.
-// // ------------------------------------------------------------------
-// glfwTerminate();
-// return 0;
 
 
 // process all input: query GLFW whether relevant keys are pressed/released this frame and react accordingly

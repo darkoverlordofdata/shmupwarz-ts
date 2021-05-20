@@ -12,7 +12,7 @@
     "jsx": "react"
   },
   "include": [
-    "./src/wasm/**/*"
-    // "./src/transformation/**/*"
+    "./src/common/**/*",
+    "./src/hello-triangle/**/*",
   ]
 }

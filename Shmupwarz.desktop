@@ -1,0 +1,8 @@
+[Desktop Entry]
+Type=Application
+Categories=Game;
+Name=Shmupwarz-ts
+StartupWMClass=Shmupwarz-ts
+Comment=Shmupwarz-ts
+Icon=/home/darko/Documents/GitHub/shmupwarz-ts/Shmupwarz.png
+Exec=/usr/bin/google-chrome /home/darko/Documents/GitHub/shmupwarz-ts/web/index.html

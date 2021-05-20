@@ -14,17 +14,32 @@
     "type": "git",
     "url": "https://github.com/darkoverlordofdata/shmupwarz-ts.git"
   },
+  "scripts": {
+    "dev": "webpack-dev-server -d",
+    "build": "node ./scripts/index.js"
+  },
   "main": "build/app.js",
   "types": "build/app.d.ts",
   "files": [
     "build/"
   ],
-  "scripts": {},
   "devDependencies": {
-    "rollup": "^2.47.0"
+    "clean-webpack-plugin": "^3.0.0",
+    "copy-webpack-plugin": "5.1.1",
+    "html-webpack-plugin": "4.0.4",
+    "prettier": "2.0.4",
+    "rollup": "^2.47.0",
+    "ts-loader": "6.2.2",
+    "typescript": "*",
+    "webpack": "4.42.1",
+    "webpack-cli": "3.3.11",
+    "webpack-dev-server": "^3.10.3"
   },
   "config": {},
   "dependencies": {
-    "global": "^4.4.0"
+    "@types/gl-matrix": "^3.2.0",
+    "gl-matrix": "^3.3.0",
+    "global": "^4.4.0",
+    "wabt": "^1.0.23"
   }
 }

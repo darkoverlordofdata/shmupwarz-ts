@@ -4,45 +4,32 @@
  * binds Game api in wasm
  */
 import { Game } from './Game'
+import { Program } from './Program'
+// var vtable:any
 
-const imports = {
-    'game': {
-        'createGame': function() {
-            return addObject(new Game())
-        },
-        'update': function(id:number) {
-            lookupObject(id).Update()
+/**
+ * WasmRun
+ * 
+ * @param file wasm file to load
+ * @param entry entry point
+ */
+export function WasmRun(file:string, entry:string) { 
+    const reference:any = []
+    
+    WebAssembly.instantiateStreaming(fetch(file), {
+        'game': {
+            'create': ():number => {
+                reference.push(new Game())
+                return reference.length-1
+            },
+            'update': (id:number):any => reference[id].Update(),
+            'initialize': (id:number):any => reference[id].Initialize()
         }
-    }
-};
+    } ).then ( (result) => {
 
+        var main = new Program(result.instance.exports)
+        main.run(entry)
 
-// interop data references
-var interop:any = []
-
-// This creates a new id, puts the object into the dictionary, then returns the new id
-function addObject(obj:any):number {
-    const id = interop.length
-    interop.push(obj)
-    return id
-}
-
-// This looks up the JS object based upon its id
-function lookupObject(id:number):any {
-    return interop[id];
-}
-
-// This cleans up the memory for the JS object (by allowing it to be garbage collected)
-function deleteObject(id:number) {
-    delete interop[id];
-}
-
-export function StartUp() { 
-    WebAssembly.instantiateStreaming(fetch('main.wasm'), imports).then(function (result) {
-        var main:any = result.instance.exports['main'];
-        main();
-    }).catch(function (e) {
-        console.error(e);
-    });
+    } ).catch ( (e) => console.error(e) )
 }
 

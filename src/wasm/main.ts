@@ -1,5 +1,5 @@
 import { Game } from './Game'
-import { StartUp } from './Bindings'
+import { WasmRun } from './Bindings'
 
-StartUp()
+WasmRun('main.wasm', 'main')
 

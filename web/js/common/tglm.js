@@ -1,4 +1,47 @@
 "use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.RotateZ = exports.Translate = exports.MatIdentity = exports.Mat4 = exports.Vec3 = void 0;
+/*******************************************************************
+** This code is part of the Dark Overload Framework.
+**
+MIT License
+
+Copyright (c) 2021 Dark Overlord of Data
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
+******************************************************************/
+/**
+ * tglm is Tiny GLM for typescript
+ *
+ * opengl math helpers inspired by GLM.
+ *
+ */
+exports.Vec3 = {
+    Create: (x, y, z) => new Float32Array([x, y, z])
+};
+exports.Mat4 = {
+    Identity: () => new Float32Array([1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1]),
+    Translate: Translate,
+    RotateZ: RotateZ,
+};
+const MatIdentity = () => new Float32Array([1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1]);
+exports.MatIdentity = MatIdentity;
 /**
  * Translate a mat4 by the given vector
  *
@@ -7,9 +50,7 @@
  * @param {ReadonlyVec3} v vector to translate by
  * @returns {mat4} out
  */
-Object.defineProperty(exports, "__esModule", { value: true });
-exports.rotateZ = exports.translate = void 0;
-function translate(out, a, v) {
+function Translate(out, a, v) {
     var x = v[0], y = v[1], z = v[2];
     var a00, a01, a02, a03;
     var a10, a11, a12, a13;
@@ -52,7 +93,7 @@ function translate(out, a, v) {
     }
     return out;
 }
-exports.translate = translate;
+exports.Translate = Translate;
 /**
  * Rotates a matrix by the given angle around the Z axis
  *
@@ -61,7 +102,7 @@ exports.translate = translate;
  * @param {Number} rad the angle to rotate the matrix by
  * @returns {mat4} out
  */
-function rotateZ(out, a, rad) {
+function RotateZ(out, a, rad) {
     var s = Math.sin(rad);
     var c = Math.cos(rad);
     var a00 = a[0];
@@ -93,5 +134,5 @@ function rotateZ(out, a, rad) {
     out[7] = a13 * c - a03 * s;
     return out;
 }
-exports.rotateZ = rotateZ;
-//# sourceMappingURL=mat.js.map
+exports.RotateZ = RotateZ;
+//# sourceMappingURL=tglm.js.map

@@ -27,3 +27,7 @@ see https://d3q3.github.io/LearnOpenGl/learnOpenGL2_p1B/part1/js/Ch8/transformat
 currently pointed at src/wasm, interop typescript with wasm, and build with closure compiler
 
 to build wasm: npm run build 
+
+javascript was slow and getting slower 5 years ago. Recently, it's running much faster, thamks a lot to google's 'new' AOT compilation. Sometimes, good things come in old packages. Chromebook helps alot too - my new lenovo duet is faster than this old inspiron i3, especially the browser.
+
+To take advantage of this, I'm using typescript to google closure compiler along with wasm interop.

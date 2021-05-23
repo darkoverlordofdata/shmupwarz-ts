@@ -48,13 +48,13 @@ export const MatIdentity = () => new Float32Array([1,0,0,0, 0,1,0,0, 0,0,1,0, 0,
  * @param {ReadonlyVec3} v vector to translate by
  * @returns {mat4} out
  */
-export function Translate(out:Float32Array, a:Float32Array, v:Float32Array) {
+export function Translate(out:Float32Array, a:Float32Array, v:Float32Array):Float32Array {
     var x = v[0],
         y = v[1],
         z = v[2];
-    var a00, a01, a02, a03;
-    var a10, a11, a12, a13;
-    var a20, a21, a22, a23;
+    var a00:number, a01:number, a02:number, a03:number;
+    var a10:number, a11:number, a12:number, a13:number;
+    var a20:number, a21:number, a22:number, a23:number;
   
     if (a === out) {
       out[12] = a[0] * x + a[4] * y + a[8] * z + a[12];
@@ -104,7 +104,7 @@ export function Translate(out:Float32Array, a:Float32Array, v:Float32Array) {
  * @param {Number} rad the angle to rotate the matrix by
  * @returns {mat4} out
  */
-export function RotateZ(out:Float32Array, a:Float32Array, rad:number) {
+export function RotateZ(out:Float32Array, a:Float32Array, rad:number):Float32Array {
     var s = Math.sin(rad);
     var c = Math.cos(rad);
     var a00 = a[0];

@@ -1,5 +1,5 @@
 {
     "modules": {
-        "web/js/app": "src/wasm/main.ts" 
+        "web/js/app": "src/breakout/main.ts" 
     }
 }

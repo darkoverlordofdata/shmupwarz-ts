@@ -4,7 +4,7 @@
     "allowJs": true,
     "sourceMap": true,
     "noImplicitAny": true,
-    "module": "amd",
+    "module": "AMD",
     "outDir": "./web/js/",
     "outFile": "./web/js/app.js",
     "esModuleInterop": true,
@@ -14,9 +14,6 @@
   },
   "include": [
     "./src/define.js",
-    "./src/wasm/**/*"
-    // "./src/transformation/**/*"
-    // "./src/texture/**/*"
-    // "./src/hello-triangle/**/*",
+    "./src/breakout/**/*",
   ]
 }

@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.RotateZ = exports.Translate = exports.MatIdentity = exports.Mat4 = exports.Vec3 = void 0;
+exports.RotateZ = exports.Translate = exports.MatIdentity = exports.Mat4 = exports.Vec4 = exports.Vec3 = void 0;
 /*******************************************************************
 ** This code is part of the Dark Overload Framework.
 **
@@ -34,6 +34,9 @@ SOFTWARE.
  */
 exports.Vec3 = {
     Create: (x, y, z) => new Float32Array([x, y, z])
+};
+exports.Vec4 = {
+    Create: (w, x, y, z) => new Float32Array([w, x, y, z])
 };
 exports.Mat4 = {
     Identity: () => new Float32Array([1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1]),

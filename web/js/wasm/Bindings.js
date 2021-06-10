@@ -6,7 +6,7 @@ exports.WasmRun = void 0;
  *
  * binds Game api in wasm
  */
-const Game_1 = require("./Game");
+const DemoGame_1 = require("./DemoGame");
 const Program_1 = require("./Program");
 // var vtable:any
 /**
@@ -20,14 +20,15 @@ function WasmRun(file, entry) {
     WebAssembly.instantiateStreaming(fetch(file), {
         'game': {
             'create': () => {
-                reference.push(new Game_1.Game());
+                reference.push(new DemoGame_1.DemoGame());
                 return reference.length - 1;
             },
-            'update': (id) => reference[id].Update()
+            'update': (id) => reference[id].Update(),
+            'initialize': (id) => reference[id].Initialize()
         }
     }).then((result) => {
         var main = new Program_1.Program(result.instance.exports);
-        main.run(entry);
+        main.Run(entry);
     }).catch((e) => console.error(e));
 }
 exports.WasmRun = WasmRun;

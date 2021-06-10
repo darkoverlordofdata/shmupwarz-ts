@@ -29,37 +29,37 @@ class Shader {
         if (log) {
             console.log(log);
         }
-        this.programId = program;
+        this.Id = program;
     }
     ;
     // activate the shader
     // ------------------------------------------------------------------------
     use(gl) {
-        gl.useProgram(this.programId);
+        gl.useProgram(this.Id);
         return this;
     }
     // utility uniform functions
     // ------------------------------------------------------------------------
     setBoolean(gl, name, value) {
-        gl.uniform1i(gl.getUniformLocation(this.programId, name), value ? 1 : 0);
+        gl.uniform1i(gl.getUniformLocation(this.Id, name), value ? 1 : 0);
     }
     // ------------------------------------------------------------------------
     setInt(gl, name, value) {
-        gl.uniform1i(gl.getUniformLocation(this.programId, name), value);
+        gl.uniform1i(gl.getUniformLocation(this.Id, name), value);
     }
     // ------------------------------------------------------------------------
     setFloat(gl, name, value) {
-        gl.uniform1f(gl.getUniformLocation(this.programId, name), value);
+        gl.uniform1f(gl.getUniformLocation(this.Id, name), value);
     }
     // ------------------------------------------------------------------------
     setFloat2(gl, name, value1, value2) {
-        gl.uniform2f(gl.getUniformLocation(this.programId, name), value1, value2);
+        gl.uniform2f(gl.getUniformLocation(this.Id, name), value1, value2);
     }
     setFloat3(gl, name, value1, value2, value3) {
-        gl.uniform3f(gl.getUniformLocation(this.programId, name), value1, value2, value3);
+        gl.uniform3f(gl.getUniformLocation(this.Id, name), value1, value2, value3);
     }
     setFloat4(gl, name, value1, value2, value3, value4) {
-        gl.uniform4f(gl.getUniformLocation(this.programId, name), value1, value2, value3, value4);
+        gl.uniform4f(gl.getUniformLocation(this.Id, name), value1, value2, value3, value4);
     }
 }
 exports.Shader = Shader;

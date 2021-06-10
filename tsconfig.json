@@ -9,10 +9,15 @@
     "esModuleInterop": true,
     "target": "es6",
     "moduleResolution": "node",
-    "jsx": "react"
+    "jsx": "react",
+    "resolveJsonModule": true
   },
   "include": [
-    "./src/wasm/**/*"
+    "./src/define.js",
+    "./src/wasm/**/*",
+    // "./src/system.js",
     // "./src/transformation/**/*"
+    // "./src/texture/**/*"
+    // "./src/hello-triangle/**/*",
   ]
 }

@@ -5,8 +5,8 @@ class Program {
     constructor(vtable) {
         this.vtable = vtable;
     }
-    run(entry) {
-        // <() => void>this.vtable[entry]()
+    Run(entry) {
+        this.vtable[entry]();
         const t1 = this.vtable['add'](1, 2);
         const t2 = this.vtable['sub'](1, 2);
         console.log(`t1 = ${t1} t2 = ${t2}`);
